@@ -199,11 +199,3 @@ For detailed scalability strategies, see the [Scaling_Notes.md](./Scaling_Notes.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Support
-
-If you encounter any issues, please open an issue in the repository or contact the development team.
-
----
-
-Built with ❤️ by the Scalable Web App Team
