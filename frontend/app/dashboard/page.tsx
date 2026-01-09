@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { api } from "@/services/api";
 import { useRouter } from "next/navigation";
+import Sidebar from "@/components/Sidebar";
 
 export default function Dashboard() {
   const [notes, setNotes] = useState<any[]>([]);
@@ -88,6 +89,11 @@ export default function Dashboard() {
     loadNotes(value);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    router.push('/login');
+  };
+
   const cancelEdit = () => {
     setTitle("");
     setContent("");
@@ -99,32 +105,25 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-        <div>
+    <div className="flex min-h-screen">
+      <Sidebar user={user} onLogout={handleLogout} />
+      <main className="flex-1 p-6 max-w-6xl mx-auto">
+        <div className="mb-6">
           <h1 className="text-2xl font-bold">Dashboard</h1>
           {user && (
             <p className="text-gray-600">Welcome, <span className="font-semibold">{user.name}</span></p>
           )}
         </div>
-        <div className="flex gap-2">
-          <button 
-            onClick={() => setShowProfileModal(true)} 
-            className="btn bg-gray-600 hover:bg-gray-700"
-          >
-            Profile
-          </button>
-          <button 
-            onClick={() => {
-              localStorage.removeItem('token');
-              router.push('/login');
-            }} 
-            className="btn self-end bg-red-600 hover:bg-red-700"
-          >
-            Logout
-          </button>
-        </div>
-      </div>
+
+      {/* Hidden profile modal trigger button */}
+      <button 
+        id="profile-modal-btn"
+        onClick={() => setShowProfileModal(true)} 
+        className="btn bg-gray-600 hover:bg-gray-700"
+        style={{ display: 'none' }}
+      >
+        Profile
+      </button>
 
       {/* Profile Modal */}
       {showProfileModal && (
@@ -228,19 +227,7 @@ export default function Dashboard() {
         </form>
       </div>
 
-      <div className="mb-6 p-4 bg-white rounded-lg shadow">
-        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-          <div className="flex-1 w-full">
-            <input 
-              type="text" 
-              placeholder="Search notes..." 
-              className="input w-full" 
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-          </div>
-        </div>
-      </div>
+      
 
       {loading ? (
         <div className="text-center py-8">Loading notes...</div>
@@ -277,6 +264,7 @@ export default function Dashboard() {
           )}
         </div>
       )}
+      </main>
     </div>
   );
 }
