@@ -4,9 +4,26 @@ A full-stack scalable web application built with Next.js (frontend) and Node.js/
 
 ## Screenshot
 
+### SignUp page
+
 ![App Output](image/img1.png)
+
+### Login Page
+
 ![App Output](image/img2.png)
+
+### Add Notes
+
 ![App Output](image/img3.png)
+
+### Edit Profile
+
+![App Output](image/img4.png)
+![App Output](image/img5.png)
+
+### Edit Note
+
+![App Output](image/img6.png)
 
 ## Features
 
