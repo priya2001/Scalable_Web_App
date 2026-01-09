@@ -1,21 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const Note = require("../models/Note");
+const { getAllNotes, createNote, getNoteById, updateNote, deleteNote } = require("../controllers/noteController");
 const auth = require("../middleware/authMiddleware");
 
-router.post("/", auth, async (req, res) => {
-  const note = await Note.create({ ...req.body, userId: req.userId });
-  res.json(note);
-});
+// GET /api/notes - Get all notes for the authenticated user
+router.get("/", auth, getAllNotes);
 
-router.get("/", auth, async (req, res) => {
-  const notes = await Note.find({ userId: req.userId });
-  res.json(notes);
-});
+// POST /api/notes - Create a new note
+router.post("/", auth, createNote);
 
-router.delete("/:id", auth, async (req, res) => {
-  await Note.findByIdAndDelete(req.params.id);
-  res.json({ message: "Deleted" });
-});
+// GET /api/notes/:id - Get a specific note by ID
+router.get("/:id", auth, getNoteById);
+
+// PUT /api/notes/:id - Update a specific note by ID
+router.put("/:id", auth, updateNote);
+
+// DELETE /api/notes/:id - Delete a specific note by ID
+router.delete("/:id", auth, deleteNote);
 
 module.exports = router;
