@@ -4,11 +4,11 @@ A full-stack scalable web application built with Next.js (frontend) and Node.js/
 
 ## Screenshot
 
-### SignUp page
+### Login page
 
 ![App Output](image/img1.png)
 
-### Login Page
+### Signup page
 
 ![App Output](image/img2.png)
 
